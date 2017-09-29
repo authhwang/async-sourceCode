@@ -275,4 +275,6 @@ export default function _asyncMap(eachfn, arr, iteratee, callback) {
 }
 ```
 
+## 代码的走向
+### concat()  ->  doLimit()  -> concatLimit()  ->  mapLimit() ->  doParallelLimit() -> map() -> eachOfLimit()
 ​	
