@@ -6,9 +6,13 @@
 
 整体上假如是同步函数 使用后会按着顺序调用 都调用完后才会调用callback 假如里面有异步 则让异步成功后再调用_eachOfLimit上的iterateeCallback来判断是否全部完成 最后再调用最初的callback 所以会看到异步会快过最初的callback
 
-以async.concat(['dir1','dir2','dir3'], fs.readdir, function(err, files) {
+以此为例
+```javascript
+async.concat(['dir1','dir2','dir3'], fs.readdir, function(err, files) {
 
-});为例
+});
+```
+
 
 1.concat函数是由```doLimit(concatLimit, Infinity);```组成
 
@@ -94,17 +98,17 @@ export { isAsync };
 
 ```javascript
 export default function asyncify(func) {
-  	/*
-  		initialParam的组成
-  		function 1(fn) {
-  			return function 2(/*...args, callback*/) {
-      			var args = slice(arguments);
-      			var callback = args.pop();
-      			fn.call(this, args, callback);
-  			};
-		}
-	这里其实是一个转换 在外层拿到的时候是func2 然后外层func2的调用时会有参数然后这些参数和回调会传给下面test函数并调用 func就是当初的fs.readdir 再把那些参数传给func 假如是promise的话就会等裁决(then方法)再把等到的裁决值(无论resolve还是rejected)传给本身func的callback
-  	*/
+  	
+  	//initialParam的组成
+  	//function 1(fn) {
+  	// return function 2(/*...args, callback*/) {
+      		//var args = slice(arguments);
+      		//var callback = args.pop();
+      		//fn.call(this, args, callback);
+  		//};
+	//}
+	//这里其实是一个转换 在外层拿到的时候是func2 然后外层func2的调用时会有参数然后这些参数和回调会传给下面test函数并调用 func就是当初的fs.readdir 再把那些参数传给func 假如是promise的话就会等裁决(then方法)再把等到的裁决值(无论resolve还是rejected)传给本身func的callback
+  	
     return initialParams(function test(args, callback) {
         var result;
         try {
