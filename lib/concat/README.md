@@ -2,7 +2,7 @@
 
 # concat 
 
-​	concat (coll, iteratee, callback(err))
+### concat (coll, iteratee, callback(err))
 
 整体上假如是同步函数 使用后会按着顺序调用 都调用完后才会调用callback 假如里面有异步 则让异步成功后再调用_eachOfLimit上的iterateeCallback来判断是否全部完成 最后再调用最初的callback 所以会看到异步会快过最初的callback
 
@@ -13,9 +13,10 @@ async.concat(['dir1','dir2','dir3'], fs.readdir, function(err, files) {
 });
 ```
 
-
+## concat函数
 1.concat函数是由```doLimit(concatLimit, Infinity);```组成
 
+## doLimit函数
 2.doLimit函数是这样组成
 
 ```javascript
@@ -32,6 +33,7 @@ function doLimit(fn, limit) {
 
 ​	它的功能是调用`concatLimit`函数并将刚开始的三个参数和并发次数参数`Infinity`传入concatLimit中
 
+## concatLimit函数
 3.concatLimit函数是由这样组成
 
 ```javascript
@@ -72,9 +74,9 @@ function(coll, limit, iteratee, callback) {
 }
 ```
 
-​	*1. noop 是lodash的方法 只返回一个undefined
+>>1. noop 是lodash的方法 只返回一个undefined
 
-​	*2.  wrapAsync是一个封装方法 代码如下 判断是否是AsyncFunction 这个值是async/await 或者promise 的方法才有
+>>2.  wrapAsync是一个封装方法 代码如下 判断是否是AsyncFunction 这个值是async/await 或者promise 的方法才有
 
 ```javascript
 import asyncify from '../asyncify';
@@ -94,7 +96,7 @@ export default wrapAsync;
 export { isAsync };
 ```
 
-​	asyncify函数的组成
+>>>asyncify函数的组成
 
 ```javascript
 export default function asyncify(func) {
@@ -142,7 +144,7 @@ function rethrow(error) {
 }
 ```
 
-​		*3. mapLimit函数是由`doParallelLimit(map)`组成
+>>3. mapLimit函数是由`doParallelLimit(map)`组成
 
 ```javascript
 function doParallelLimit(fn) {
@@ -152,7 +154,7 @@ function doParallelLimit(fn) {
 }
 ```
 
-跟`doLimit`函数的功能一样 调用`map`函数并将外层的参数和回调传给map方法 但这样不同的是  eachOfLimit调用后是一个方法 代码下图一 itertee已经是下图二 callback是下图三
+>>跟`doLimit`函数的功能一样 调用`map`函数并将外层的参数和回调传给map方法 但这样不同的是  eachOfLimit调用后是一个方法 代码下图一 itertee已经是下图二 callback是下图三
 
 图一:
 
@@ -249,7 +251,7 @@ function(err, mapResults) {
  };
 ```
 
-​	*4.  map的代码是如下
+>>4.  map的代码是如下
 
 ```javascript
 export default function _asyncMap(eachfn, arr, iteratee, callback) {
