@@ -250,7 +250,7 @@ function(err, mapResults) {
 
  };
 ```
-### map函数
+## map函数
 map的代码是如下
 
 ```javascript
