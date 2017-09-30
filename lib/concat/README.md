@@ -76,7 +76,7 @@ function(coll, limit, iteratee, callback) {
 
 1. noop 是lodash的方法 只返回一个undefined
 
-2.  wrapAsync是一个封装方法 代码如下 判断是否是AsyncFunction 这个值是async/await 或者promise 的方法才有
+2. wrapAsync是一个封装方法 代码如下 判断是否是AsyncFunction 这个值是async/await 或者promise 的方法才有
 
 ```javascript
 import asyncify from '../asyncify';
@@ -200,7 +200,7 @@ function _eachOfLimit(limit) {
                   }
                   return;
               }
-              //onlyOnce 的作用我觉得就是做一个日常判断 实际上没什么用 因为iterateeCallback不会为空
+              //onlyOnce 当调用完的时候就会销毁 做为一个判断
               running += 1;
               iteratee(elem.value, elem.key, onlyOnce(iterateeCallback));
           }
