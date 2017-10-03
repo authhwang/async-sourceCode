@@ -60,6 +60,7 @@ function eachOfArrayLike(coll, iteratee, callback) {
     }
 	//循环 一个一个执行 调用createTester的图一
     for (; index < length; index++) {
+      								//这里的onlyOnce不能销毁里面的callback
         iteratee(coll[index], index, onlyOnce(iteratorCallback));
     }
 }
