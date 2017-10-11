@@ -20,7 +20,7 @@ async.every(['file1','file2','file3'], function(filePath, callback) {
 
 every函数是由`doParallel(createTester(notId, notId));`组成
 
-其中`notId`就是一个将传进去的第一个参数隐式转换成bool值并取反返回 这个函数在之后的判断起了决定性的作用
+其中`notId`就是一个将传进去的第一个参数强制转换成bool值并取反返回 这个函数在之后的判断起了决定性的作用
 
 后面的就跟detect一样 直接跳到createTester来讲就行
 
