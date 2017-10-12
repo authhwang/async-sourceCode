@@ -34,11 +34,28 @@ var consoleAsyncForReduce = function(memo,item,callback) {
   callback(null,memo + item);
 };
 
+var consoleFuncForTransform = function(acc,item,index,callback) {
+  console.log('进入item为' + item);
+  acc.push(item * 2);
+  callback();
+};
+
+var consoleAsyncForTransform = function(acc,item,index,callback) {
+  console.log('item为' + item);
+  setTimeout(function() {
+    console.log('进入item为' + item);
+    acc.push(item * 2);
+    callback();
+  });
+};
+
 module.exports = {
   consoleFunc,
   consoleAsnyc,
   consoleFuncForObj,
   consoleAsnycForObj,
   consoleFuncForReduce,
-  consoleAsyncForReduce
+  consoleAsyncForReduce,
+  consoleFuncForTransform,
+  consoleAsyncForTransform
 };
